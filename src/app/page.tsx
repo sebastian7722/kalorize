@@ -1,15 +1,13 @@
-import SignIn from "@/components/sign-in";
 import { auth } from "@/lib/auth";
+import DashboardPage from "./dashboard-page";
+import SignInPage from "./sign-in-page";
 
 export default async function Home() {
   const session = await auth();
 
-  if (!session?.user) return <SignIn />;
+  if (!session?.user) {
+    return <SignInPage />;
+  }
 
-  return (
-    <div>
-      <h1>Hello world</h1>
-      <p>{JSON.stringify(session.user, null, 2)}</p>
-    </div>
-  );
+  return <DashboardPage {...session} />;
 }
