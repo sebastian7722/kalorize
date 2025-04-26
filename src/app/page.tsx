@@ -1,13 +1,14 @@
-import { auth } from "@/lib/auth";
-import DashboardPage from "./dashboard-page";
-import SignInPage from "./sign-in-page";
+import { getCurrentUser } from "@/auth/currentUser";
+import SignOut from "@/components/auth/sign-out";
 
 export default async function Home() {
-  const session = await auth();
+  const session = await getCurrentUser({ withFullUser: true });
 
-  if (!session?.user) {
-    return <SignInPage />;
-  }
-
-  return <DashboardPage {...session} />;
+  return (
+    <div>
+      <h1 className="text-zinc-50">Hello world</h1>
+      <p className="text-zinc-200">{JSON.stringify(session, null, 2)}</p>
+      <SignOut />
+    </div>
+  );
 }

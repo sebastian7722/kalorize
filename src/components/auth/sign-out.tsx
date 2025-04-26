@@ -1,11 +1,11 @@
 "use client";
+import { logOut } from "@/auth/actions";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
-import { signOut } from "next-auth/react";
 
 export default function SignOut() {
   return (
-    <Button className="py-5 cursor-pointer" onClick={() => signOut()}>
+    <Button className="py-5 cursor-pointer" onClick={() => logOut()}>
       <LogOut /> Sign Out
     </Button>
   );

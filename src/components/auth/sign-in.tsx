@@ -1,10 +1,13 @@
 "use client";
+import { oAuthSignIn } from "@/auth/actions";
 import { Button } from "@/components/ui/button";
-import { signIn } from "next-auth/react";
 
 export default function SignIn() {
   return (
-    <Button className="py-5 cursor-pointer" onClick={() => signIn("google")}>
+    <Button
+      className="py-5 cursor-pointer"
+      onClick={() => oAuthSignIn("google")}
+    >
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
         <path
           fill="#EA4335"
