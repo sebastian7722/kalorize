@@ -3,6 +3,7 @@ import {
   getUserFromSession,
   updateUserSessionExpiration,
 } from "./auth/session";
+import { oAuthProviders } from "./drizzle/schema";
 
 export async function middleware(request: NextRequest) {
   const response = (await middlewareAuth(request)) ?? NextResponse.next();
@@ -18,14 +19,20 @@ export async function middleware(request: NextRequest) {
 }
 
 async function middlewareAuth(request: NextRequest) {
+  const user = await getUserFromSession(request.cookies);
+
   if (
     request.nextUrl.pathname === "/sign-in" ||
-    request.nextUrl.pathname.includes("/api/oauth")
+    oAuthProviders.some(
+      (provider) => request.nextUrl.pathname === `/api/oauth/${provider}`
+    )
   ) {
+    if (user != null) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
     return NextResponse.next();
   }
 
-  const user = await getUserFromSession(request.cookies);
   if (user == null) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
