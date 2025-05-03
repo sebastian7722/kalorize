@@ -1,5 +1,5 @@
 import { env } from "@/data/env/server";
-import { OAuthProvider } from "@/drizzle/schema";
+import { OAuthProvider } from "@/drizzle/schema/users";
 import crypto from "crypto";
 import { z } from "zod";
 import { Cookies } from "../session";

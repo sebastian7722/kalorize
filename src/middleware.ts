@@ -3,7 +3,7 @@ import {
   getUserFromSession,
   updateUserSessionExpiration,
 } from "./auth/session";
-import { oAuthProviders } from "./drizzle/schema";
+import { oAuthProviders } from "./drizzle/schema/users";
 
 export async function middleware(request: NextRequest) {
   const response = (await middlewareAuth(request)) ?? NextResponse.next();

@@ -1,6 +1,6 @@
 "use server";
 
-import { OAuthProvider } from "@/drizzle/schema";
+import { OAuthProvider } from "@/drizzle/schema/users";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getOAuthClient } from "./oauth/client";

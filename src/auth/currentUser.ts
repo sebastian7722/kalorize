@@ -1,5 +1,5 @@
 import { db } from "@/drizzle/db";
-import { UserTable } from "@/drizzle/schema";
+import { UserTable } from "@/drizzle/schema/users";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

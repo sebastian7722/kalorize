@@ -6,7 +6,7 @@ import {
   oAuthProviders,
   UserOAuthAccountTable,
   UserTable,
-} from "@/drizzle/schema";
+} from "@/drizzle/schema/users";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

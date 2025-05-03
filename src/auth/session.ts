@@ -1,5 +1,5 @@
 import { db } from "@/drizzle/db";
-import { userRoles, UserSessionTable, UserTable } from "@/drizzle/schema";
+import { userRoles, UserSessionTable, UserTable } from "@/drizzle/schema/users";
 import crypto from "crypto";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
