@@ -5,6 +5,7 @@ import { NextRequest } from "next/server";
 import { z } from "zod";
 
 export const foodResponseSchema = z.object({
+  id: z.string(),
   name: z.string(),
   category: z.string(),
   calories: z.number(),

@@ -58,9 +58,13 @@ export default function Searchbar() {
       <div className={cn(search.length >= 3 ? "flex" : "hidden")}>
         <div className="absolute bg-zinc-800 rounded-md p-5 mt-2 w-full">
           <p className="text-zinc-50">Search results for: {search}</p>
-          <ul className="list-disc list-inside text-zinc-200 mt-2">
-            {searchResult.map((food, index) => (
-              <Link key={index} href={`/food/${createSlug(food.name)}`}>
+          <ul className="flex flex-col text-zinc-200 mt-2 gap-2">
+            {searchResult.map((food) => (
+              <Link
+                key={food.id}
+                href={`/food/${food.id}`}
+                onClick={() => setSearch("")}
+              >
                 <li className="list-none bg-zinc-700 px-4 py-3 rounded-md hover:bg-zinc-600 transition-colors duration-200 cursor-pointer">
                   {food.name} - {food.calories} kcal 100g
                 </li>
