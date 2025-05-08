@@ -2,8 +2,19 @@
 
 import { FoodSearchResponse } from "@/app/api/food/route";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Input } from "./ui/input";
+import styles from "./searchbar.module.css";
+
+import slugify from "slugify";
+
+function createSlug(name: string) {
+  return slugify(name, {
+    lower: true,
+    strict: true,
+    remove: /[*+~.()'"!:@]/g,
+  });
+}
 
 export default function Searchbar() {
   const [search, setSearch] = useState<string>("");
@@ -34,20 +45,26 @@ export default function Searchbar() {
 
   return (
     <div className="relative" ref={searchRef}>
-      <Input
+      <input
+        className={cn(
+          "bg-zinc-700/50 text-zinc-50 rounded-md px-4.5 py-3 w-full focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:ring-offset-2 focus:ring-offset-zinc-900",
+          styles["search-input"]
+        )}
         type="search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search food"
       />
       <div className={cn(search.length >= 3 ? "flex" : "hidden")}>
-        <div className="absolute bg-zinc-700/50 rounded-md p-5 mt-1 w-full">
+        <div className="absolute bg-zinc-800 rounded-md p-5 mt-2 w-full">
           <p className="text-zinc-50">Search results for: {search}</p>
           <ul className="list-disc list-inside text-zinc-200 mt-2">
-            {searchResult.map((food, i) => (
-              <li key={i}>
-                {food.name} - {food.calories} kcal 100g
-              </li>
+            {searchResult.map((food, index) => (
+              <Link key={index} href={`/food/${createSlug(food.name)}`}>
+                <li className="list-none bg-zinc-700 px-4 py-3 rounded-md hover:bg-zinc-600 transition-colors duration-200 cursor-pointer">
+                  {food.name} - {food.calories} kcal 100g
+                </li>
+              </Link>
             ))}
           </ul>
         </div>
